@@ -15,7 +15,6 @@ class Block(val index: Int,
     val hash = calculateHash() // calculate block has
     val timestamp: Long = Date().time // get current time in milliseconds
 
-
     /**
      * Each block in the chain should obligatory consist of timestamp,
      * data that’s stored, hash of previous block and its own hash.
