@@ -22,6 +22,15 @@ object Blockchain {
         if (isNewBlockValid(block)) chain.add(block)
     }
 
+    fun mineBlock(data: Any): Block {
+        val proofOfWork = generateProofOfWork(latestBlock.proofOfWork)
+        val block = Block(chain.size, latestBlock.hash, data, proofOfWork)
+
+        addNewBlock(block)
+
+        return latestBlock
+    }
+
 
     /**
      * that the more blocks in the network, the harder the operation should be,

@@ -17,5 +17,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="io.javalin:javalin:1.6.0" level="project" />
+    <orderEntry type="library" name="com.fasterxml.jackson.module:jackson-module-kotlin:2.9.5" level="project" />
   </component>
 </module>
