@@ -10,7 +10,8 @@ import java.util.*
  */
 class Block(val index: Int,
             val previousHash: String,
-            val data: Any) {
+            val data: Any,
+            val proofOfWork: Int) {
 
     val hash = calculateHash() // calculate block has
     val timestamp: Long = Date().time // get current time in milliseconds

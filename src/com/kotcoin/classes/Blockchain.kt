@@ -5,21 +5,23 @@ object Blockchain {
     /*
     MutableList : A generic ordered collection of elements that supports adding and removing elements.
      */
-    val chain: MutableList<Block> = mutableListOf(createGenesisBlock())
+    val chain: MutableList<Block> = mutableListOf()
+
+    val latestBlock: Block
+        get() = chain.last()
+
+
+    init {
+        chain.add(Block(0, "0", "Genesis block", 0))
+    }
 
     /**
      * create a new block and add it to chain
      */
-    fun addNewBlock(data: Any) {
-        val block = Block(chain.size + 1, getLatestBlock().hash, data)
-        chain.add(block)
+    fun addNewBlock(block: Block) {
+        if (isNewBlockValid(block)) chain.add(block)
     }
 
-    fun getLatestBlock(): Block {
-
-        // Returns the last element in chain list
-        return chain.last()
-    }
 
     /**
      * that the more blocks in the network, the harder the operation should be,
@@ -36,15 +38,12 @@ object Blockchain {
     }
 
 
-    private fun isNewBlockValid(newBlock: Block): Boolean =
-            ((newBlock.index == getLatestBlock().index + 1) && (newBlock.previousHash == getLatestBlock().hash))
-
-
     /**
-     * hard code so-called genesis block which is just our usual block
-     * taking place of 1st element in the chain
+     *  takes a Block as the argument and checks if it’s in the correct position in the chain and
+     *  if the previous block’s hash is equal to the property previousHash in new block.
      */
-    private fun createGenesisBlock(): Block {
-        return Block(0, "0", "Genesis block")
-    }
+    private fun isNewBlockValid(newBlock: Block): Boolean =
+            ((newBlock.index == latestBlock.index + 1) || (newBlock.previousHash == latestBlock.hash))
+
+
 }
