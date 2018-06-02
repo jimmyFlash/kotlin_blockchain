@@ -22,6 +22,12 @@ object Blockchain {
         if (isNewBlockValid(block)) chain.add(block)
     }
 
+
+    /**
+     * firstly the chain generates proofOfWork for new block, then creates new Block object and finally adds it to the chain.
+     * The new block is not going to be added if the validation fails.
+     * After that, the method returns the latest element in the chain.
+     */
     fun mineBlock(data: Any): Block {
         val proofOfWork = generateProofOfWork(latestBlock.proofOfWork)
         val block = Block(chain.size, latestBlock.hash, data, proofOfWork)
@@ -33,7 +39,7 @@ object Blockchain {
 
 
     /**
-     * that the more blocks in the network, the harder the operation should be,
+     * the more blocks in the network, the harder the operation should be,
      * hence the optional difficulty parameter. In this case I’ve implemented
      * a simple algorithm which finds the next value divisible by >9 multiplied by difficulty level<
      */
